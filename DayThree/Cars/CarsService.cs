@@ -14,7 +14,8 @@ public class CarsService() : ICarsService
 
         if (itemToBeAdded.Id == 0)
         {
-            itemToBeAdded.Id = _sequentialOrder++;
+            _sequentialOrder++;
+            itemToBeAdded.Id = _sequentialOrder;
         }
 
         _backingStore.Add(itemToBeAdded);

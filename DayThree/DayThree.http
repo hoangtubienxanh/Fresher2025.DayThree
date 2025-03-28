@@ -5,10 +5,11 @@ Accept: application/json
 
 ###
 
-POST {{DayThree_HostAddress}}/api/car
+POST {{DayThree_HostAddress}}/api/car?type=fuel
 Content-Type: application/json
 
 {
+  "id": 0,
   "make": "idk",
   "model": "idc",
   "year": 1999,
