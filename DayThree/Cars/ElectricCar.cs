@@ -6,6 +6,6 @@ public class ElectricCar : Car, IChargeable
 
     public void Charge(DateTime timeOfCharge)
     {
-        throw new NotImplementedException();
+        ChargedAt = timeOfCharge;
     }
 }

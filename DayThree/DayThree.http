@@ -1,6 +1,16 @@
 @DayThree_HostAddress = http://localhost:5272
 
-GET {{DayThree_HostAddress}}/weatherforecast/
+GET {{DayThree_HostAddress}}/api/car/
 Accept: application/json
 
 ###
+
+POST {{DayThree_HostAddress}}/api/car
+Content-Type: application/json
+
+{
+  "make": "idk",
+  "model": "idc",
+  "year": 1999,
+  "lastMaintenanceDate": "2025-03-28T00:00:00"
+}

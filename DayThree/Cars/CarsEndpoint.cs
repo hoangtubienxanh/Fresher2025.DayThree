@@ -1,11 +1,12 @@
 using DayThree.Cars;
 
 using Microsoft.AspNetCore.Http.HttpResults;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.OpenApi;
 
 namespace DayThree;
 
-public static class dCarsEndpoint
+public static class CarsEndpoint
 {
     public static void MapCarEndpoints(this IEndpointRouteBuilder routes)
     {
@@ -68,9 +69,30 @@ public static class dCarsEndpoint
         return TypedResults.NoContent();
     }
 
-    private static Results<Created<Car>, ValidationProblem> CreateCar(ICarsService carsService, Car model)
+    private static Results<Created<Car>, ValidationProblem> CreateCar(ICarsService carsService, Car model,
+        [FromQuery(Name = "type")] string type)
     {
-        carsService.Add(model);
+        Car? car = null;
+        switch (type)
+        {
+            case "fuel":
+                car = new FuelCar
+                {
+                    Id = model.Id, Make = model.Make, Model = model.Model, Year = model.Year,
+                };
+                break;
+            case "electric":
+                car = new ElectricCar
+                {
+                    Id = model.Id, Make = model.Make, Model = model.Model, Year = model.Year,
+                };
+                break;
+            default:
+                throw new ArgumentException("Validation Problem");
+                break;
+        }
+
+        carsService.Add(car!);
         return TypedResults.Created($"/api/Cars/{model.Id}", model);
     }
 

@@ -6,6 +6,6 @@ public class FuelCar : Car, IFuelable
 
     public void Refuel(DateTime timeOfRefuel)
     {
-        throw new NotImplementedException();
+        FueledAt = timeOfRefuel;
     }
 }
